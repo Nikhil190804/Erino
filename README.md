@@ -23,9 +23,6 @@
   - [Environment Variables (summary)](#environment-variables-summary)
     - [Backend `.env`](#backend-env)
     - [Frontend `.env` (Vite)](#frontend-env-vite)
-  - [Seeding and Migration](#seeding-and-migration)
-    - [Seed](#seed)
-    - [Migration (assign owner to legacy leads)](#migration-assign-owner-to-legacy-leads)
   - [API Reference \& Examples](#api-reference--examples)
     - [Auth](#auth)
       - [Register](#register)
@@ -37,10 +34,6 @@
     - [cURL Examples](#curl-examples)
   - [Postman Notes](#postman-notes)
   - [Frontend Usage Notes](#frontend-usage-notes)
-  - [Deployment Notes](#deployment-notes)
-    - [Backend (Render recommended)](#backend-render-recommended)
-    - [Frontend (Vercel/Netlify/Render Static)](#frontend-vercelnetlifyrender-static)
-  - [Security Considerations](#security-considerations)
 
 ---
 
@@ -75,11 +68,9 @@ This project is a simple Lead Management system:
 ## Live / Deployed Links (attach here)
 Replace the placeholders below with your real deployed URLs.
 
-- **Frontend (Production):** `https://your-frontend-url.example`
-- **Backend (API):** `https://your-backend-url.onrender.com`
-- **Overall Project / Demo:** `https://your-frontend-url.example` (or a document/demo page)
-
-> To attach links: edit this README file in your repo or replace these lines with actual URLs after deployment.
+- **Frontend (Production):** `https://erino-five.vercel.app/login`
+- **Backend (API):** `https://erino-0hrn.onrender.com`
+- **Overall Project / Demo:** `https://erino-five.vercel.app/login` (or a document/demo page)
 
 ---
 
@@ -93,8 +84,8 @@ Replace the placeholders below with your real deployed URLs.
 ### Steps
 1. Clone repo:
 ```bash
-git clone <repo-url> lead-manager-backend
-cd lead-manager-backend
+git clone <repo-url> 
+cd backend
 ```
 
 2. Install dependencies:
@@ -152,8 +143,8 @@ GET http://localhost:4000/health
 ### Steps
 1. Clone frontend:
 ```bash
-git clone <repo-url> react-frontend
-cd react-frontend
+git clone <repo-url> 
+cd frontend
 ```
 
 2. Install:
@@ -210,14 +201,6 @@ This:
   - `admin@erino.test` / `Admin1234!` (role: admin)
   - 120 leads assigned to either test user or admin
 
-### Migration (assign owner to legacy leads)
-If existing leads lack `created_by`, run:
-```bash
-node scripts/migrate_assign_owner.js
-```
-This assigns a default owner (test user or first user found) to leads missing ownership.
-
----
 
 ## API Reference & Examples
 
@@ -305,31 +288,5 @@ curl -b cookiejar.txt "{{API_BASE}}/leads/<LEAD_ID>"
 - AG Grid displays leads from `GET /api/leads`.
 - Create/Edit lead uses `/api/leads` endpoints; only owner or admin can edit/delete.
 - The UI expects the backend to be reachable via `import.meta.env.VITE_API_BASE` (set at build time).
-
----
-
-## Deployment Notes
-
-### Backend (Render recommended)
-- Build Command: `npm install`
-- Start Command: `npm start`
-- Set environment variables in Render dashboard.
-- Ensure `app.set('trust proxy', 1)` is enabled on the server if behind a proxy.
-- Run `npm run seed` once in the Render shell to populate demo data.
-
-### Frontend (Vercel/Netlify/Render Static)
-- Build Command: `npm run build`
-- Publish Directory: `dist`
-- Set `VITE_API_BASE` in hosting envs to your backend API URL.
-- Deploy — verify login flow and cookie (`Set-Cookie` header) in Network tab.
-
----
-
-## Security Considerations
-- Use `httpOnly` cookies to protect JWTs from XSS.
-- For cross-site cookies, backend must set `SameSite=None; Secure` and be served over HTTPS.
-- Use strong `JWT_SECRET` and rotate if compromised.
-- Validate inputs server-side (recommend using `Joi` or `express-validator`).
-- Add rate limiting and logging for production environments.
 
 ---
