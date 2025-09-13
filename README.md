@@ -65,12 +65,11 @@ This project is a simple Lead Management system:
 
 ---
 
-## Live / Deployed Links (attach here)
-Replace the placeholders below with your real deployed URLs.
+## Live / Deployed Links
 
 - **Frontend (Production):** `https://erino-five.vercel.app/login`
 - **Backend (API):** `https://erino-0hrn.onrender.com`
-- **Overall Project / Demo:** `https://erino-five.vercel.app/login` (or a document/demo page)
+- **Overall Project:** `https://erino-five.vercel.app/login` 
 
 ---
 
