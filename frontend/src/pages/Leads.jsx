@@ -60,7 +60,6 @@ export default function Leads(){
     if(fd.get('email_contains')) newFilters.email_contains = fd.get('email_contains');
     if(fd.get('company_contains')) newFilters.company_contains = fd.get('company_contains');
     if(fd.get('status')) newFilters.status = fd.get('status');
-    // more fields can be added
     setFilters(newFilters);
     await fetchData(1, limit, newFilters);
   };

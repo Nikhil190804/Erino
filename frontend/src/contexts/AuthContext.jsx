@@ -1,4 +1,3 @@
-// src/contexts/AuthContext.jsx
 import React, { createContext, useState, useEffect, useRef } from 'react';
 import API from '../api/api';
 import { useNavigate } from 'react-router-dom';
@@ -10,10 +9,9 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
   const controllerRef = useRef(null);
-  const navigate = useNavigate?.(); // safe if used inside Router
+  const navigate = useNavigate?.(); 
 
   async function fetchMe() {
-    // cancel previous request if any
     if (controllerRef.current) {
       try { controllerRef.current.abort(); } catch (e) {}
     }
@@ -27,7 +25,6 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
       return res.data;
     } catch (err) {
-      // aborted request -> ignore
       if (err.name === 'CanceledError' || err.name === 'AbortError') {
         return null;
       }
@@ -40,7 +37,6 @@ export const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    // prevent duplicate execution in dev StrictMode
     if (initialized.current) return;
     initialized.current = true;
 
@@ -56,7 +52,6 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try { await API.post('/auth/logout'); } catch (e) {}
     setUser(null);
-    // optionally navigate to login:
     try { if (navigate) navigate('/login'); } catch (e) {}
   };
 
