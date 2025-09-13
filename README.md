@@ -1,5 +1,6 @@
 
 # Lead Manager — Fullstack Project
+Deployed Link: https://erino-five.vercel.app/login
 
 > Complete end-to-end Lead Management application (React + Vite frontend, Express + MongoDB backend).  
 > This README covers local setup (server), deployment links section, features, API usage, and detailed instructions for running, seeding, and troubleshooting.
